@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Platform } from 'react-native';
 import Button from '../../components/button/Button';
 import CustomTextInput from '../../components/textInput/CustomTextInput';
 import { useNavigation, } from '@react-navigation/native';
 import { Formik } from 'formik';
-import TextError from '../../components/textError/textError';
+import TextError from './../../components/textError/TextError';
 import * as Yup from 'yup';
 import ApiService from '../../servicesApi/ApiService';
 import AsyncStorage from "@react-native-community/async-storage";
-import Snackbar from '../../components/snackBar/SnackBar';
+import Snackbar from './../../components/snackBar/Snackbar';
 
 
 
@@ -49,14 +49,19 @@ const Login = () => {
       await AsyncStorage.setItem("@RNAuth:token", response.token);
       navigation.navigate('Lista');
     } catch (error) {
-      setSnackbarVisible(true);
-      console.error(error);
-    }finally{
+      if (Platform.OS === 'android' || Platform.OS === 'ios') {
+        console.error("Erro ao validar");
+      } else {
+        setSnackbarVisible(true);
+
+      }
+
+    } finally {
       setLoading(false)
     }
   };
 
-  
+
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().required('Username é obrigatório'),
@@ -69,35 +74,35 @@ const Login = () => {
 
   return (
     <>
-      {globalLoading ? (<ActivityIndicator size="small" color="#800080" /> ) : (
-      <Formik
-        initialValues={{ username: '', password: '' }}
-        onSubmit={handleLogin}
-        validationSchema={validationSchema}
-      >
-        {({ handleChange, handleSubmit, values, errors }) => (
-          <View>
-            <CustomTextInput
-              value={values.username}
-              onChangeText={handleChange('username')}
-              placeholder="Username"
-            />
-            {errors.username && <TextError error={errors.username} />}
+      {globalLoading ? (<ActivityIndicator size="small" color="#800080" />) : (
+        <Formik
+          initialValues={{ username: '', password: '' }}
+          onSubmit={handleLogin}
+          validationSchema={validationSchema}
+        >
+          {({ handleChange, handleSubmit, values, errors }) => (
+            <View>
+              <CustomTextInput
+                value={values.username}
+                onChangeText={handleChange('username')}
+                placeholder="Username"
+              />
+              {errors.username && <TextError error={errors.username} />}
 
-            <CustomTextInput
-              value={values.password}
-              onChangeText={handleChange('password')}
-              placeholder="Password"
-              secureTextEntry={true}
-            />
-            {errors.password && <TextError error={errors.password} />}
+              <CustomTextInput
+                value={values.password}
+                onChangeText={handleChange('password')}
+                placeholder="Password"
+                secureTextEntry={true}
+              />
+              {errors.password && <TextError error={errors.password} />}
 
-            <Button labelButton="Entrar" loading={loading} onPress={handleSubmit} />
+              <Button labelButton="Entrar" loading={loading} onPress={handleSubmit} />
 
-            <Button labelButton="Cadastrar" loading={loading} onPress={navigationToCadastrar} />
-          </View>
-        )}
-      </Formik>)}
+              <Button labelButton="Cadastrar" loading={loading} onPress={navigationToCadastrar} />
+            </View>
+          )}
+        </Formik>)}
 
 
       {snackbarVisible && (

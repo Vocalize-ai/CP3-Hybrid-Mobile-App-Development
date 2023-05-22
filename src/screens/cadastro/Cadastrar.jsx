@@ -4,7 +4,7 @@ import CustomTextInput from '../../components/textInput/CustomTextInput';
 import Button from '../../components/button/Button';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import TextError from '../../components/textError/textError';
+import TextError from '../../components/textError/TextError';
 import ApiService from '../../servicesApi/ApiService';
 import { useNavigation } from '@react-navigation/native';
 

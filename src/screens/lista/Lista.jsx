@@ -39,8 +39,8 @@ const Lista = () => {
   }, []);
 
   const handleSairPress = () => {
-    AsyncStorage.clear("@RNAuth:user");
-    AsyncStorage.clear("@RNAuth:token");
+    AsyncStorage.removeItem("@RNAuth:user");
+    AsyncStorage.removeItem("@RNAuth:token");
     navigation.navigate('Login');
 
   };

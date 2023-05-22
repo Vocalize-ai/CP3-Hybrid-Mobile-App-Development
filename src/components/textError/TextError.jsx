@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 
 const TextError = ({ error }) => {
     return (
-        <Text style={styles.textErro}>{error}</Text>
+        <View>
+            <Text style={styles.textErro}>{error}</Text>
+        </View>
     );
 };
 
