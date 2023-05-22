@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 
-const TextError = ({ error }) => {
+const CustomTextErro = ({ error }) => {
     return (
         <View>
             <Text style={styles.textErro}>{error}</Text>
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TextError;
+export default CustomTextErro;

@@ -4,12 +4,11 @@ import Button from '../../components/button/Button';
 import CustomTextInput from '../../components/textInput/CustomTextInput';
 import { useNavigation, } from '@react-navigation/native';
 import { Formik } from 'formik';
-import TextError from './../../components/textError/TextError';
 import * as Yup from 'yup';
 import ApiService from '../../servicesApi/ApiService';
 import AsyncStorage from "@react-native-community/async-storage";
 import Snackbar from './../../components/snackBar/Snackbar';
-
+import CustomTextErro from '../../components/customTextErro/CustomTextErro';
 
 
 const Login = () => {
@@ -87,7 +86,7 @@ const Login = () => {
                 onChangeText={handleChange('username')}
                 placeholder="Username"
               />
-              {errors.username && <TextError error={errors.username} />}
+              {errors.username && <CustomTextErro error={errors.username} />}
 
               <CustomTextInput
                 value={values.password}
@@ -95,7 +94,7 @@ const Login = () => {
                 placeholder="Password"
                 secureTextEntry={true}
               />
-              {errors.password && <TextError error={errors.password} />}
+              {errors.password && <CustomTextErro error={errors.password} />}
 
               <Button labelButton="Entrar" loading={loading} onPress={handleSubmit} />
 

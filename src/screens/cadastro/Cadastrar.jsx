@@ -4,9 +4,9 @@ import CustomTextInput from '../../components/textInput/CustomTextInput';
 import Button from '../../components/button/Button';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import TextError from '../../components/textError/TextError';
 import ApiService from '../../servicesApi/ApiService';
 import { useNavigation } from '@react-navigation/native';
+import CustomTextErro from '../../components/customTextErro/CustomTextErro';
 
 const Cadastrar = () => {
   const navigation = useNavigation();
@@ -61,7 +61,7 @@ const Cadastrar = () => {
             onChangeText={handleChange('username')}
             placeholder="Username"
           />
-          {errors.username && <TextError error={errors.username} />}
+          {errors.username && <CustomTextErro error={errors.username} />}
 
           <CustomTextInput
             value={values.email}
@@ -69,14 +69,14 @@ const Cadastrar = () => {
             placeholder="Email"
             keyboardType="email-address"
           />
-          {errors.email && <TextError error={errors.email} />}
+          {errors.email && <CustomTextErro error={errors.email} />}
 
           <CustomTextInput
             value={values.nomeCompleto}
             onChangeText={handleChange('nomeCompleto')}
             placeholder="Nome Completo"
           />
-          {errors.nome && <TextError error={errors.nomeCompleto} />}
+          {errors.nomeCompleto && <CustomTextErro error={errors.nomeCompleto} />}
 
           <CustomTextInput
             value={values.password}
@@ -84,7 +84,7 @@ const Cadastrar = () => {
             placeholder="Password"
             secureTextEntry={true}
           />
-          {errors.password && <TextError error={errors.password} />}
+          {errors.password && <CustomTextErro error={errors.password} />}
 
           <CustomTextInput
             value={values.confirmPassword}
@@ -93,7 +93,7 @@ const Cadastrar = () => {
             secureTextEntry={true}
           />
           {errors.confirmPassword && (
-            <TextError error={errors.confirmPassword} />
+            <CustomTextErro error={errors.confirmPassword} />
           )}
 
           <Button labelButton="Cadastrar" loading={loading} onPress={handleSubmit} />
